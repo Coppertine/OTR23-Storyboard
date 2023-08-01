@@ -1,0 +1,21 @@
+﻿FormatVersion: 7
+Name: "Drop1 1"
+Script: "Drop1"
+Multithreaded: No
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random Seed"
+    BeginsGroup: "Common"
+Layers:
+  8d686a0c063a4779a508a75e942948dc:
+    Name: ""
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
+  5780a0f8a0a1476a99737dbc3dd13436:
+    Name: "Foreground"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes

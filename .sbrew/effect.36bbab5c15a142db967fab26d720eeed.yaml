@@ -1,0 +1,16 @@
+﻿FormatVersion: 7
+Name: "Outro 1"
+Script: "Outro"
+Multithreaded: No
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random Seed"
+    BeginsGroup: "Common"
+Layers:
+  abf61344d7cc45919db6f0f70741805c:
+    Name: ""
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes

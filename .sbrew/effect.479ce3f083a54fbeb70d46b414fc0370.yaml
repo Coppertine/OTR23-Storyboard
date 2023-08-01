@@ -1,0 +1,26 @@
+﻿FormatVersion: 7
+Name: "Hitobjects 1"
+Script: "Hitobjects"
+Multithreaded: No
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random Seed"
+    BeginsGroup: "Common"
+Layers:
+  d3c8531c3ae64255aa7f9ae776a6b358:
+    Name: "Particles"
+    OsbLayer: Foreground
+    DiffSpecific: No
+    Visible: Yes
+  c3ef8da2785e4a53bcc79ef7cd9ec76b:
+    Name: "Rings"
+    OsbLayer: Foreground
+    DiffSpecific: No
+    Visible: Yes
+  3755b97534fb4cb596adc73bfd86c7ee:
+    Name: "Highlight"
+    OsbLayer: Foreground
+    DiffSpecific: No
+    Visible: Yes

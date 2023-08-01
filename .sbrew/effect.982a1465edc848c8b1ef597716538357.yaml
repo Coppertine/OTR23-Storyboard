@@ -1,0 +1,16 @@
+﻿FormatVersion: 7
+Name: "CircleInvasion 1"
+Script: "CircleInvasion"
+Multithreaded: No
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random Seed"
+    BeginsGroup: "Common"
+Layers:
+  c7e347911f2e4e029a59b56e4ab26c44:
+    Name: "Square Invasion"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes

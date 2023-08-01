@@ -1,0 +1,16 @@
+﻿FormatVersion: 7
+Name: "Transitions 1"
+Script: "Transitions"
+Multithreaded: No
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random Seed"
+    BeginsGroup: "Common"
+Layers:
+  719f625c03a74a148cb8da0704c62ce0:
+    Name: ""
+    OsbLayer: Foreground
+    DiffSpecific: No
+    Visible: Yes

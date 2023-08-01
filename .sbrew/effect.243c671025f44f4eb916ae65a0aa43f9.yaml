@@ -1,0 +1,21 @@
+﻿FormatVersion: 7
+Name: "StaffCredits 1"
+Script: "StaffCredits"
+Multithreaded: No
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "0"
+    DisplayName: "Random Seed"
+    BeginsGroup: "Common"
+Layers:
+  bfa3063d960a4cd3ad8dc942b4cad35c:
+    Name: ""
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
+  9479aa0144354bdaada1528fa7932caa:
+    Name: "Staff"
+    OsbLayer: Foreground
+    DiffSpecific: No
+    Visible: Yes

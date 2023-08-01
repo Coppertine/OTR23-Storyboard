@@ -1,0 +1,31 @@
+﻿FormatVersion: 7
+Name: "Buildup 1"
+Script: "Buildup"
+Multithreaded: No
+Config:
+  RandomSeed:
+    Type: "System.Int32"
+    Value: "13"
+    DisplayName: "Random Seed"
+    BeginsGroup: "Common"
+Layers:
+  6b4b3cbdf2b246e693eb78633d6902a6:
+    Name: "Background"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
+  3ae846deff194126b941ec54fe3be032:
+    Name: "Tunnel"
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
+  4f94814e86d542d3964a5b7c80c0d50e:
+    Name: ""
+    OsbLayer: Background
+    DiffSpecific: No
+    Visible: Yes
+  2dca8df1dd2d4bcbb2674f4cf68d636d:
+    Name: "Foreground"
+    OsbLayer: Foreground
+    DiffSpecific: No
+    Visible: Yes
