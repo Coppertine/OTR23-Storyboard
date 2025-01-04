@@ -1,5 +1,6 @@
 using OpenTK;
 using OpenTK.Graphics;
+using StorybrewCommon.Animations;
 using StorybrewCommon.Mapset;
 using StorybrewCommon.Scripting;
 using StorybrewCommon.Storyboarding;
@@ -62,11 +63,11 @@ namespace StorybrewScripts
 
 
             blurBackground.Fade(92665, 95332, 0, 0.8);
-            blurBackground.Scale(97799, (480.0f / 1423.0f) * 1.25);
+            blurBackground.Scale(97799, (480.0f / 720.0f) * 1.25);
             topPanel.Fade(97999, 1);
             bottomPanel.Fade(97999, 1);
-            topPanel.Color(97999, Color4.Gray);
-            bottomPanel.Color(97999, Color4.Gray);
+            topPanel.Color(97999, "#111320");
+            bottomPanel.Color(97999, "#111320");
 
             topPanel.ScaleVec(97999, 100665, new Vector2(853, 0), new Vector2(853, 240));
             bottomPanel.ScaleVec(97999, 100665, new Vector2(853, 0), new Vector2(853, 240));
@@ -113,19 +114,20 @@ namespace StorybrewScripts
         {
             Scene3d scene = new Scene3d();
             PerspectiveCamera camera = new PerspectiveCamera();
-            camera.FarFade.Add(295430, 200);
-            camera.FarClip.Add(295430, 350);
-            scene.Root.PositionX.Add(295430, 0);
-            scene.Root.PositionY.Add(295430, 0);
-            scene.Root.PositionZ.Add(295430, 0);
+            camera.FarFade.Add(295413, 200);
+            camera.FarClip.Add(295413, 350);
+            scene.Root.PositionX.Add(295413, 0);
+            scene.Root.PositionY.Add(295413, 0);
+            scene.Root.PositionZ.Add(295413, 0);
 
-            camera.PositionX.Add(295430, 0);
-            camera.PositionY.Add(295430, 0);
-            camera.PositionZ.Add(295430, -100);
+            camera.PositionX.Add(295413, 0);
+            camera.PositionY.Add(295413, 0);
+            camera.PositionZ.Add(295413, -100);
 
-            var startTime = 295430;
-            var ReserseTime = 300763;
-            var endTime = 304763;
+            var startTime = 295413;
+            var ReserseTime = 300746;
+            var stopReverse = 304746;
+            var endTime = 306079;
             var offset = 10;
             var length = 1000;
             var barWidth = 700;
@@ -144,7 +146,7 @@ namespace StorybrewScripts
                     SpritePath = "sb/p.png",
                     UseDistanceFade = true
                 };
-                Log(z);
+                // Log(z);
                 barTop.PositionX.Add(startTime, 0);
                 barTop.PositionY.Add(startTime, -(tunnelHeight / 2));
                 barTop.PositionZ.Add(startTime, z);
@@ -222,11 +224,13 @@ namespace StorybrewScripts
             scene.Root.PositionZ.Add(ReserseTime, -800);
 
             scene.Root.Rotation.Add(ReserseTime, new Quaternion(new Vector3(0, 0, 0), 1));
-            scene.Root.Rotation.Add(endTime, new Quaternion(new Vector3(0, 0, 1), 0));
+            scene.Root.Rotation.Add(stopReverse, new Quaternion(new Vector3(0, 0, 1), 0));
 
             scene.Root.PositionZ.Add(303430, -400);
-            scene.Root.PositionZ.Add(endTime, -50);
-            scene.Generate(camera, GetLayer("Tunnel"), startTime, endTime, Beatmap.GetTimingPointAt(startTime).BeatDuration / 4);
+            scene.Root.PositionZ.Add(stopReverse, -50);
+            scene.Root.PositionZ.Add(endTime, -800, EasingFunctions.ExpoIn);
+
+            scene.Generate(camera, GetLayer("Tunnel"), startTime, endTime, Beatmap.GetTimingPointAt(startTime).BeatDuration / 2);
         }
 
         void AddTriangles(Node3d node, double time)
@@ -265,7 +269,7 @@ namespace StorybrewScripts
             int startTime = 343430;
             int endTime = 348763;
             Scene3d scene = new Scene3d();
-            // I don't want to fuck around with cameras... sooo camera stays there during ~~sex~~ scene
+            // I don't want to fuck around with cameras... sooo camera stays there during s̵e̵x̵  scene
             PerspectiveCamera camera = new PerspectiveCamera();
             camera.FarClip.Add(startTime, 350);
             camera.FarFade.Add(startTime, 200);
@@ -305,7 +309,7 @@ namespace StorybrewScripts
             finalSquare.PositionZ.Add(endTime, -90);
             scene.Add(finalSquare);
 
-            scene.Generate(camera, GetLayer(""), startTime, endTime, 4);
+            scene.Generate(camera, GetLayer(""), startTime, endTime, Beatmap.GetTimingPointAt(startTime).BeatDuration / 4);
         }
     }
 

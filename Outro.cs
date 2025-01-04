@@ -16,10 +16,16 @@ namespace StorybrewScripts
     {
         public override void Generate()
         {
-		    
+		    OsbSprite introbg = GetLayer("").CreateSprite("sb/p.png");
+            introbg.ScaleVec(393130,854,480);
+            introbg.Fade(393130, 1); 
+            introbg.Color(393130, "#111320");
+            introbg.Fade(407062, 417971,1, 0);
+            // introbg.Fade(71316,0);
             OsbSprite glow = GetLayer("").CreateSprite("sb/g.png", OsbOrigin.CentreLeft, new Vector2(320, 480));
             glow.Rotate(393130, -Math.PI / 2);
-            glow.Fade(OsbEasing.InOutQuad, 393130, 396308, 0, 0.8);
+            glow.Fade(OsbEasing.InOutQuad, 393130, 396308, 0, 0.4);
+            glow.Fade(OsbEasing.InOutQuad, 396308, 407062, 0.4, 0.2);
             glow.Additive(393130);
             Vector2 glowStartScale = new Vector2(0.5f, 9);
             Vector2 glowEndScale = new Vector2(0.65f, 9);
@@ -27,7 +33,7 @@ namespace StorybrewScripts
             glow.ScaleVec(OsbEasing.InOutQuad, 0, Beatmap.GetTimingPointAt(393130).BeatDuration * 4, glowStartScale, glowEndScale);
             glow.ScaleVec(OsbEasing.InOutQuad, Beatmap.GetTimingPointAt(393130).BeatDuration * 4, Beatmap.GetTimingPointAt(393130).BeatDuration * 8, glowEndScale, glowStartScale);
             glow.EndGroup();
-            glow.Fade(407062, 417971,1, 0);
+            glow.Fade(407062, 417971,0.2, 0);
         }
     }
 }

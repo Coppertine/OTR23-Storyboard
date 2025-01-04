@@ -16,8 +16,8 @@ namespace StorybrewScripts
     {
         public override void Generate()
         {
-            double startScale = (480.0f / 1080);
-            double scale = (480.0f / 1080) / 2;
+            double startScale = 1;
+            double scale = 0.5;
             double endTime = 295430;
 
 		    OsbSprite backLayerSprite = GetLayer("Background").CreateSprite("sb/logo/open-2023.png");

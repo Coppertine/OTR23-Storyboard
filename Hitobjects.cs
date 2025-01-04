@@ -17,13 +17,19 @@ namespace StorybrewScripts
         OsbSpritePool ringPool, particlePool, highlightPool;
         public override void Generate()
         {
-            particlePool = new OsbSpritePool(GetLayer("Particles"), "sb/dot.png", OsbOrigin.Centre);
-            particlePool.MaxPoolDuration = 5000;
-            ringPool = new OsbSpritePool(GetLayer("Rings"), "sb/ring.png", OsbOrigin.Centre);
-            ringPool.MaxPoolDuration = 5000;
+            particlePool = new OsbSpritePool(GetLayer("Particles"), "sb/dot.png", OsbOrigin.Centre)
+            {
+                MaxPoolDuration = 1000
+            };
+            ringPool = new OsbSpritePool(GetLayer("Rings"), "sb/ring.png", OsbOrigin.Centre)
+            {
+                MaxPoolDuration = 1000
+            };
 
-            highlightPool = new OsbSpritePool(GetLayer("Highlight"), "sb/light.png", OsbOrigin.Centre);
-            highlightPool.MaxPoolDuration = 5000;
+            highlightPool = new OsbSpritePool(GetLayer("Highlight"), "sb/light.png", OsbOrigin.Centre)
+            {
+                MaxPoolDuration = 1000
+            };
 
 
             foreach (OsuHitObject hitObject in Beatmap.HitObjects)
@@ -36,7 +42,7 @@ namespace StorybrewScripts
                 // Edit, there is.. it's just shit.. let's go old fasioned..
 
                 // Drop 1
-                if (103332 <= hitObject.StartTime && hitObject.StartTime <= 123332)
+                if (103315 <= hitObject.StartTime && hitObject.StartTime <= 123315)
                 {
                     // Let's do Finishes for now
                     if (hitObject.Additions.HasFlag(HitSoundAddition.Finish))
@@ -57,7 +63,7 @@ namespace StorybrewScripts
                     }
                 }
 
-                if (183332 <= hitObject.StartTime && hitObject.StartTime <= 193332)
+                if (183315 <= hitObject.StartTime && hitObject.StartTime <= 193315)
                 {
                     if (hitObject is OsuSlider)
                     {
@@ -67,7 +73,7 @@ namespace StorybrewScripts
                     }
                 }
 
-                if (195332 <= hitObject.StartTime && hitObject.StartTime <= 198998)
+                if (195648 <= hitObject.StartTime && hitObject.StartTime <= 198981)
                 {
                     if (hitObject is OsuSlider)
                         Highlight(hitObject, 1000, true);
@@ -83,9 +89,9 @@ namespace StorybrewScripts
                     153998 <= hitObject.StartTime && hitObject.StartTime <= 161998
 
                     || 169998 <= hitObject.StartTime && hitObject.StartTime <= 171998 ||
-                    163165 <= hitObject.StartTime && hitObject.StartTime <=167332 ||
-                    172665 <= hitObject.StartTime && hitObject.StartTime <= 177998 ||
-                    203332 <= hitObject.StartTime && hitObject.StartTime <= 204080)
+                    163165 <= hitObject.StartTime && hitObject.StartTime <= 167332 ||
+                    172648 <= hitObject.StartTime && hitObject.StartTime <= 177981 ||
+                    203315 <= hitObject.StartTime && hitObject.StartTime <= 204068)
                 {
                     Ring(OsbEasing.OutExpo, hitObject, 1000);
                     Particles(OsbEasing.OutExpo, hitObject, 1000);
@@ -104,7 +110,7 @@ namespace StorybrewScripts
                     Ring(OsbEasing.OutExpo, hitObject, 1000);
                 }
 
-                if (216947 <= hitObject.StartTime && hitObject.StartTime <= 218598)
+                if (216878 <= hitObject.StartTime && hitObject.StartTime <= 218561)
                 {
                     Particles(OsbEasing.OutExpo, hitObject, 1000);
                 }
@@ -123,8 +129,8 @@ namespace StorybrewScripts
                 light.Additive(hitObject.StartTime);
                 light.Scale(hitObject.StartTime, Random(0.3, 0.4));
                 light.Fade(hitObject.StartTime, hitObject.StartTime + 200, 0, 1);
-                light.Fade(hitObject.EndTime, hitObject.EndTime + duration, 1, 0);
-                light.CommandSplitThreshold = 300;
+                light.Fade(stayVisible ? hitObject.EndTime + 200 : hitObject.StartTime + 200, endTime, 1, 0);
+                // light.CommandSplitThreshold = 300;
                 return;
             }
 
@@ -135,9 +141,9 @@ namespace StorybrewScripts
                 light.Move(time, hitObject.PositionAtTime(time));
                 light.Color(time, hitObject.Color);
                 light.Scale(time, Random(0.3, 0.4));
-                light.Fade(time, time <= hitObject.EndTime - 200 && hitObject.EndTime <= time ? hitObject.EndTime : time + 200, 0, 1);
+                light.Fade(time, time >= hitObject.EndTime - 200 && hitObject.EndTime >= time ? hitObject.EndTime : time + 200, 0, 1);
                 light.Fade(hitObject.EndTime, hitObject.EndTime + duration, 1, 0);
-                light.CommandSplitThreshold = 300;
+                // light.CommandSplitThreshold = 300;
             }
         }
 
@@ -173,7 +179,7 @@ namespace StorybrewScripts
                 {
                     OsbSprite particle = particlePool.Get(hitObject.StartTime, endTime);
                     double angle = Random(0, Math.PI * 2);
-                    double radius = Random(0, maxRadius);
+                    double radius = Random(2, maxRadius);
                     Vector2 position = new Vector2(
                         (float)(hitObject.Position.X + Math.Cos(angle) * radius),
                         (float)(hitObject.Position.Y + Math.Sin(angle) * radius)

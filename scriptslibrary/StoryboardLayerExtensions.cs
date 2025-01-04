@@ -5,9 +5,9 @@ using StorybrewCommon.Subtitles;
 
 namespace StorybrewScripts {
     public static class StoryboardLayerExtensions {
-        public static Lyric CreateLyric(this StoryboardLayer layer, StoryboardObjectGenerator gen, FontGenerator font, string line, OsbOrigin origin, double scale, Vector2 initialPosition)
+        public static Lyric CreateLyric(this StoryboardLayer layer, StoryboardObjectGenerator gen, FontGenerator font, string line, OsbOrigin origin, double scale, Vector2 initialPosition, bool vertical = false)
         {
-            return new Lyric(layer, gen, font, line, origin, scale, initialPosition);
+            return new Lyric(layer, gen, font, line, origin, scale, initialPosition, vertical);
         }
     }
 }

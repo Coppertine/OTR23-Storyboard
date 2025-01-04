@@ -23,10 +23,10 @@ namespace StorybrewScripts
         {
             lyricLayer = GetLayer("Lyric");
             List<CollabPart> CollabParts = ReadCollabFile("collabList.csv");
-
+ 
             fontGen = LoadFont("sb/f/c", new FontDescription()
             {
-                FontPath = "fonts/Nexa-Heavy.ttf",
+                FontPath = "fonts/PretendardJP-Thin.otf",
                 FontSize = 55,
                 Color = Color4.White,
                 Padding = Vector2.Zero,
@@ -37,7 +37,7 @@ namespace StorybrewScripts
             },
             new FontShadow()
             {
-                Thickness = 5,
+                Thickness = 2,
                 Color = Color4.Black
             });
 

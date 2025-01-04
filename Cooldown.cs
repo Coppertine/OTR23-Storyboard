@@ -18,19 +18,19 @@ namespace StorybrewScripts
         {
 
 
-            int startTime = 219011;
-            int endTime = 292430;
+            int startTime = 218977;
+            int endTime = 295413;
             var FadeDuration = 200;
             var MaxOpacity = 0.1;
-            var Amount = 50;
-            var PerOne = 5;
-            Vector2 Scale = new Vector2(1, 1);
+            var Amount = 45;
+            var PerOne = 6;
+            Vector2 Scale = new Vector2(2,2);
             Vector2 BorderMin = new Vector2(-107, 0);
             Vector2 BorderMax = new Vector2(747, 480);
 
             OsbSprite bg = GetLayer("").CreateSprite("sb/p.png");
-            bg.ScaleVec(startTime - FadeDuration, 853, 480);
-            bg.Color(startTime - FadeDuration, Color4.PowderBlue);
+            bg.ScaleVec(startTime - FadeDuration, 854, 480);
+            bg.Color(startTime - FadeDuration, Color4.DarkMagenta);
             bg.Fade(startTime - FadeDuration, startTime, 0, 0.4);
             bg.Fade(endTime - FadeDuration, endTime, 0.4, 0);
 
@@ -41,11 +41,11 @@ namespace StorybrewScripts
                     for (var c = 0; c < PerOne; c++)
                     {
                         var sprite = pool.Get(startTime - FadeDuration, endTime);
-                        var RandomOffset = new Vector2(Random(-50, 50), Random(-50, -50));
+                        var RandomOffset = new Vector2(Random(-25, 25), Random(-25, -25));
                         sprite.Move(startTime - FadeDuration, endTime, RandomPos + RandomOffset, (RandomPos + RandomOffset - new Vector2(320, 240)) * Random(1.25f, 2f) + new Vector2(320, 240));
 
-                        var RandomWhite = Random(190, 255) / 255f;
-                        Color4[] colors = { Color4.Red, Color4.DarkGray, Color4.Purple, Color4.DarkGreen, Color4.Coral, Color4.DarkGoldenrod };
+                        // var RandomWhite = Random(190, 255) / 255f;
+                        Color4[] colors = { Color4.Red,Color4.DarkGray, Color4.Purple, Color4.DarkGreen, Color4.Coral, Color4.DarkGoldenrod };
 
                         sprite.Color(startTime - FadeDuration, colors[Random(0, colors.Count())]);
                         var opacity = Random(0.05f, MaxOpacity);
@@ -69,7 +69,7 @@ namespace StorybrewScripts
             fadeOutOverlay.Fade(endTime - FadeDuration, endTime, 0, 1);
             fadeOutOverlay.Fade(295430, 0);
 
-
+            // todo: lyrics, make them vertical with fading in characters
         }
     }
 }

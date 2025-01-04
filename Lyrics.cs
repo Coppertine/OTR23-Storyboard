@@ -48,6 +48,11 @@ namespace StorybrewScripts
 
 
             generateScaleOut("空をとぶ天使になるの", 121665, 124665, 320, 240);
+ 
+            generateScaleOut("いつ来るのだろう?", 268955, 274079, 320, 240);
+
+
+            generatePerLine("空をとぶ天使になるの", 292079, 295413, 320, 380);
 
 
             generatePerLine("きれいなお花畑の真ん中", 348430, 354763, 320, 350);
@@ -56,6 +61,15 @@ namespace StorybrewScripts
             generatePerLine("きれいな羽根で空をとぶ天使になるの", 364763, 370096, 320, 350);
 
 
+            // Ikyou Hana!
+            OsbSprite LetsGO = GetLayer("").CreateSprite(fontGen.GetTexture("いきょう はな").Path);
+            LetsGO.Scale(169315,0.125);
+            var dur = (169981 - 169315) /10;
+            LetsGO.StartLoopGroup(169315, 10);
+                LetsGO.Fade(0,dur,0.5,0);
+            LetsGO.EndGroup();
+            // LetsGO.Fade(169315,0.5);
+            LetsGO.Fade(169981,0);
 
         }
 

@@ -20,20 +20,20 @@ namespace StorybrewScripts
         {
             StoryboardLayer layer = GetLayer("Background");
             OsbSprite backgroundBlur = layer.CreateSprite("sb/ultrablur.jpg");
-            backgroundBlur.Scale(183332, (480.0f / 1423) * 1.25);
-            backgroundBlur.Fade(183332, 0.5);
+            backgroundBlur.Scale(183315, (480.0f / 720) * 1.25);
+            backgroundBlur.Fade(183315, 0.5);
             backgroundBlur.Fade(193998, 0);
             OsbSprite background = layer.CreateSprite(Beatmap.BackgroundPath);
-            background.Scale(183332, (480.0f / 1423) * 1.25);
-            background.Fade(183332, 0.4);
+            background.Scale(183315, (480.0f / 1423) * 1.25);
+            background.Fade(183315, 0.4);
             background.Fade(193998, 0);
-            background.Additive(183332);
+            background.Additive(183315);
 
 
             float currRot = 0;
             Vector2 currPos = new Vector2(320, 240);
-            double currTime = 183332;
-            Beatmap.ForEachTick(183332, 193998, 4, (point, time, beat, tick) =>
+            double currTime = 183315;
+            Beatmap.ForEachTick(183315, 193998, 4, (point, time, beat, tick) =>
             {
                 if (tick % 4 == 0 || IsStrongHit(time))
                 {
@@ -53,10 +53,10 @@ namespace StorybrewScripts
                 }
             });
 
-            var beatduration = Beatmap.GetTimingPointAt(183332).BeatDuration;
-            var startTime = 183332;
+            var beatduration = Beatmap.GetTimingPointAt(183315).BeatDuration;
+            var startTime = 183315;
             var endTime = 193998;
-            using (var pool = new OsbSpritePool(GetLayer(""), "sb/p.png", OsbOrigin.Centre, (sprite, start, end) =>
+            using (var pool = new OsbSpritePool(GetLayer("Squares"), "sb/p.png", OsbOrigin.Centre, (sprite, start, end) =>
             {
                 sprite.Scale(start, Random(20f, 80f));
                 sprite.MoveX(start, Random(-107, 757));
@@ -68,12 +68,14 @@ namespace StorybrewScripts
                 for (var sTime = (double)startTime; sTime <= endTime - beatduration * 4; sTime += beatduration / 2f)
                 {
                     var baseSpeed = Random(40, 120);
+                    if (Random(0, 4) > 0) //HACK move the time back in order to increase the particle count without running into syncing issues
+                        sTime -= beatduration / 2f;
                     var eTime = sTime + Math.Ceiling(620f / baseSpeed) * beatduration;
 
                     var sprite = pool.Get(sTime, eTime);
-
+ 
                     var moveSpeed = baseSpeed * -1;
-                    var currentTime = sTime + (sTime - Beatmap.GetTimingPointAt(183332).Offset) % beatduration;
+                    var currentTime = sTime + (sTime - Beatmap.GetTimingPointAt(183315).Offset) % beatduration;
 
                     sprite.MoveY(sTime, 540);
                     while (sprite.PositionAt(currentTime).Y > -60)
@@ -88,8 +90,7 @@ namespace StorybrewScripts
                         currentTime += beatduration;
                     }
 
-                    if (Random(0, 4) > 0) //HACK move the time back in order to increase the particle count without running into syncing issues
-                        sTime -= beatduration / 2f;
+                    
                 }
 
             }
@@ -162,10 +163,7 @@ namespace StorybrewScripts
         private bool IsStrongHit(double time)
         {
             List<double> times = new List<double>{
-                187332,
-                187582,
-                187832,
-                192665
+                187315,
             };
             foreach(var listTime in times)
             {
@@ -175,5 +173,6 @@ namespace StorybrewScripts
 
             return false;
         }
+        
     }
 }

@@ -18,9 +18,14 @@ namespace StorybrewScripts
         {
 		    
             var vignette = GetLayer("").CreateSprite("sb/vignette.png");
-            vignette.Scale(0, 480.0f / 1080);
-            vignette.Fade(0,1);
-            vignette.Fade(407062, 417971, 1,0); 
+            vignette.ScaleVec(0, 480.0f / 1080, 480.0f / 1080);
+            vignette.ScaleVec(159648, 787.0f / 1920, 480.0f / 1080);
+            vignette.ScaleVec(159981, 480.0f / 1080, 480.0f / 1080);
+            vignette.ScaleVec(160315, 787.0f / 1920, 480.0f / 1080);
+            vignette.ScaleVec(160648, 480.0f / 1080, 480.0f / 1080);
+
+            vignette.Fade(0,0.6);
+            vignette.Fade(407062, 417971, 0.6,0);
         }
     }
 }

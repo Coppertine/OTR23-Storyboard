@@ -29,7 +29,7 @@ namespace StorybrewScripts
             int startTime = 177998; // fade in early
             int recordScratch = 179998;
             int squareTakeover = 180665;
-            int endTime = 183332;
+            int endTime = 183315;
             int starCount = 240;
             int width = 200;
             int height = 200;
@@ -37,8 +37,8 @@ namespace StorybrewScripts
             Scene3d scene = new Scene3d();
             // I don't want to fuck around with cameras... sooo camera stays there during ~~sex~~ scene
             PerspectiveCamera camera = new PerspectiveCamera();
-            camera.FarClip.Add(startTime, 350);
-            camera.FarFade.Add(startTime, 200);
+            camera.FarClip.Add(startTime, 350).Add(recordScratch,350).Add(squareTakeover, 600);
+            camera.FarFade.Add(startTime, 200).Add(recordScratch,200).Add(squareTakeover, 500);
             camera.PositionX.Add(startTime, 0);
             camera.PositionY.Add(startTime, 0);
             camera.PositionZ.Add(startTime, -100);
@@ -77,7 +77,7 @@ namespace StorybrewScripts
             int ringOffset = 20;
             int startZ = 0;
             int endZ = -20;
-            int endEndZ = 400;
+            int endEndZ = 600;
             for (int i = 0; i < ringCount; i++)
             {
                 Sprite3d ring = new Sprite3d
@@ -100,7 +100,7 @@ namespace StorybrewScripts
             int smallSquareCount = 10;
             int smallSquareOffset = 40;
             startZ = -500;
-            endZ = 400;
+            endZ = 600;
             for (int i = 0; i < smallSquareCount; i++)
             {
                 Sprite3d square = new Sprite3d
@@ -114,16 +114,16 @@ namespace StorybrewScripts
 
                 square.PositionZ.Add(recordScratch, (i * smallSquareOffset) + startZ);
                 square.PositionZ.Add(recordScratch + 1000, (i * smallSquareOffset) + endZ);
-
+                square.SpriteRotation.Add(recordScratch, MathHelper.DegreesToRadians(i * 5));
                 smallSquareTunnel.Add(square);
             }
 
-            int squareCount = 400;
+            int squareCount = 200;
             int squareOffset = 20;
-            startZ = 400;
-            endZ = -800;
-            for (int i = 0; i < smallSquareCount; i++)
-            {
+            startZ = 550;
+            endZ = -500;
+            for (int i = 0; i < squareCount; i++)
+            { 
                 Sprite3d square = new Sprite3d
                 {
                     SpritePath = "sb/box2.png",
@@ -131,11 +131,15 @@ namespace StorybrewScripts
                 };
                 square.ConfigureGenerators((s) => {
                     s.ScaleDecimals = 4;
+                    s.ScaleTolerance = 0.001;
                 });
 
                 square.PositionZ.Add(squareTakeover, (i * squareCount) + startZ);
-                square.PositionZ.Add(endTime, (i * squareOffset) + endZ);
+                square.Opacity.Add(squareTakeover, 0).Add(squareTakeover+1000, 1);
+                square.PositionZ.Add(endTime, (i * squareOffset) + endZ, EasingFunctions.SineOut);
                 square.SpriteScale.Add(squareTakeover, new Vector2(2));
+                square.SpriteRotation.Add(squareTakeover, MathHelper.DegreesToRadians(i * 5));
+ 
                 squareTunnel.Add(square);
             }
 
@@ -144,9 +148,9 @@ namespace StorybrewScripts
                 UseDistanceFade = true
             };
             
-            finalSquare.SpriteScale.Add(181998, 100);
-            finalSquare.SpriteRotation.Add(181998, Math.PI / 4);
-            finalSquare.PositionZ.Add(181998, startZ);
+            finalSquare.SpriteScale.Add(182815, 100);
+            finalSquare.SpriteRotation.Add(182815, Math.PI / 4);
+            finalSquare.PositionZ.Add(182815, 600);
             finalSquare.PositionZ.Add(endTime, -100);
             squareTunnel.Add(finalSquare);
 
@@ -155,7 +159,7 @@ namespace StorybrewScripts
             scene.Add(smallSquareTunnel);
             scene.Add(squareTunnel);
 
-            scene.Generate(camera, GetLayer("Square Invasion"), startTime, endTime, 4);
+            scene.Generate(camera, GetLayer("Square Invasion"), startTime, endTime, Beatmap.GetTimingPointAt(startTime).BeatDuration / 6);
         }
     }
 }
